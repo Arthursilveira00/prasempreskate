@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PSSKATEBOARD — Streetwear com atitude</title>
+
+  <!-- Fonts Google: Orbitron (título) + Montserrat (corpo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* RESET */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #121212;
+      color: #eee;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0f0f0f 0%, #1f1f1f 100%);
+      padding: 40px 20px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 3.8rem;
+      color: #a503c5;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px #6f2770cc;
+      user-select: none;
+    }
+
+    nav {
+      background: #1e1e1e;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px 10px;
+      border-bottom: 3px solid #333;
+      box-shadow: inset 0 -3px 10px rgba(255,75,43,0.15);
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 14px 24px;
+      color: #bbb;
+      position: relative;
+      transition: color 0.3s ease;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      user-select: none;
+    }
+
+    nav button::after {
+      content: '';
+      position: absolute;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, #3a2555, #4a1d7e);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width 0.35s ease;
+      border-radius: 3px;
+    }
+
+    nav button:hover {
+      color: #822d9c;
+    }
+
+    nav button:hover::after {
+      width: 100%;
+    }
+
+    nav button.active {
+      color: #6e6e6e;
+      font-weight: 900;
+      text-shadow: 0 0 10px #ea00ffcc;
+    }
+
+    nav button.active::after {
+      width: 100%;
+      box-shadow: 0 0 12px #5b0163cc;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    /* FADE IN ANIMATION */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* INÍCIO - INTRO */
+    #inicio {
+      text-align: center;
+      color: #eee;
+    }
+
+    #inicio img {
+      max-width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    #inicio img:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
+
+    #inicio h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: #5a5a5a;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      user-select: none;
+    }
+
+    #inicio p {
+      font-size: 1.25rem;
+      max-width: 850px;
+      margin: 0 auto 50px;
+      color: #ccc;
+      font-weight: 500;
+      text-shadow: 0 0 5px #0008;
+    }
+
+    #inicio .cards {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    #inicio .card {
+      background: #222;
+      padding: 25px 20px;
+      border-radius: 14px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+      max-width: 280px;
+      flex: 1 1 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    #inicio .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px #ffffff88;
+    }
+
+    #inicio .card img {
+      width: 60px;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 0 4px #ffffffaa);
+    }
+
+    #inicio .card h3 {
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    #inicio .card p {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    /* PRODUTOS */
+    h2.produtos-titulo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      color: #646464;
+      margin-bottom: 30px;
+      user-select: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .produto {
+      background: #1d1d1d;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .produto:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 15px 35px #ffffffbb;
+    }
+
+    .produto img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      border-bottom: 4px solid #732d88;
+      transition: transform 0.4s ease;
+    }
+
+    .produto:hover img {
+      transform: scale(1.07);
+      filter: brightness(1.1);
+    }
+
+    .produto h3 {
+      font-weight: 700;
+      color: #692783;
+      font-size: 1.3rem;
+      padding: 15px 20px 5px;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .produto .preco {
+      font-size: 1.2rem;
+      color: #ffffff;
+      padding: 0 20px 12px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+    }
+
+    .produto p.desc {
+      font-size: 1rem;
+      color: #ccc;
+      padding: 0 20px 15px;
+      flex-grow: 1;
+      font-weight: 400;
+    }
+
+    .produto p.tamanho {
+      font-size: 0.9rem;
+      color: #999;
+      padding: 0 20px 15px;
+      font-style: italic;
+    }
+
+    .produto a.compra {
+      display: block;
+      margin: 0 20px 20px;
+      background: linear-gradient(45deg, #682291, #6834bb);
+      color: white;
+      text-align: center;
+      padding: 14px 0;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      box-shadow: 0 4px 12px #03cf51bb;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .produto a.compra:hover {
+      background: linear-gradient(45deg, #34e41d, #76f076);
+      box-shadow: 0 6px 20px #0cfcb4cc;
+    }
+
+    /* CONTATO */
+    #contato {
+      max-width: 650px;
+      margin: 0 auto 60px;
+      color: #ddd;
+      text-align: center;
+    }
+
+    #contato h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      color: #6b31c7;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    #contato p.info {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      color: #ccc;
+      user-select: text;
+    }
+
+    form {
+      background: #1e1e1e;
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(255, 75, 43, 0.3);
+      text-align: left;
+      user-select: none;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #ffffff;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: none;
+      background: #121212;
+      color: #eee;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      box-shadow: inset 0 0 5px #ff4b2b88;
+      resize: vertical;
+      transition: box-shadow 0.3s ease;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px #dfbbb5cc;
+      background: #1a1a1a;
+    }
+
+    form button[type="submit"] {
+      background: linear-gradient(45deg, #ff2bf4, #f0d5cd);
+      border: none;
+      color: white;
+      padding: 16px 30px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 5px 15px #50add8cc;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+    }
+
+    form button[type="submit"]:hover {
+      background: linear-gradient(45deg, #d6c6dd, #e49deb);
+      box-shadow: 0 7px 20px #6a3794cc;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: #666;
+      padding: 20px 15px;
+      text-align: center;
+      font-size: 0.9rem;
+      user-select: none;
+      border-top: 1px solid #222;
+      letter-spacing: 0.5px;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.8rem;
+      }
+
+      nav {
+        gap: 15px;
+        padding: 12px 10px;
+      }
+
+      nav button {
+        font-size: 1rem;
+        padding: 10px 16px;
+      }
+
+      #inicio img {
+        height: auto;
+      }
+
+      main {
+        margin: 30px auto;
+        padding: 0 15px;
+      }
+
+      .produtos {
+        grid-template-columns: 1fr;
+      }
+
+      form button[type="submit"] {
+        font-size: 1.1rem;
+        padding: 14px 20px;
+      }
+
+      @media (max-width: 480px) {
+ 
+        header h1 {
+ 
+          font-size: 2.2rem;
+ 
+          letter-spacing: 2px;
+ 
+        }
+
+
+  
+        nav {
+          flex-direction: column;
+          gap: 10px;
+          padding: 10px 5px;
+        }
+ 
+        nav button {
+          width: 100%;
+          padding: 12px;
+          font-size: 1rem;
+        }
+
+  
+        #inicio img {
+          height: auto;
+          max-height: 240px;
+      }
+
+      #inicio p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+
+      #inicio .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .produto img {
+        height: 200px;
+      }
+
+      .produto h3,
+      .produto .preco,
+      .produto p.desc,
+      .produto p.tamanho {
+        padding: 0 10px;
+        text-align: center;
+      }
+
+  
+      .produto a.compra {
+        margin: 10px;
+        padding: 12px 0;
+  }
+
+  
+  
+  form {
+    padding: 20px;
+  }
+
+  form label {
+    font-size: 1rem;
+  }
+
+  form button[type="submit"] {
+    font-size: 1rem;
+    padding: 14px 20px;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 15px 10px;
+  }
+  
+}
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>PSSKATEBOARD</h1>
+  </header>
+
+  <nav>
+    <button id="btn-inicio" onclick="mostrarAba('inicio', this)" class="active" aria-current="page">Início</button>
+    <button id="btn-moletons" onclick="mostrarAba('novidades', this)">Novidades</button>
+    <button id="btn-camisetas" onclick="mostrarAba('camisetas', this)">Camisetas</button>
+    <button id="btn-contato" onclick="mostrarAba('contato', this)">Contato</button>
+  </nav>
+
+  <main>
+    <section id="inicio" class="active" aria-label="Página inicial">
+      <img src="img/5a38f963-6a82-48a5-b8b7-73164fa7b659.jpeg" alt="">
+
+      <h2></h2>
+      <p>
+        Na <strong>PSSKATEBOARD</strong>, não vendemos apenas roupas — entregamos atitude, identidade e liberdade para quem vive as ruas. 
+      </p>
+    </section>
+
+    <section id="novidades" aria-label="Seção de Moletons">
+      <h2 class="produtos-titulo">Lançamentos</h2>
+      <div class="produtos">
+        <div class="produto">
+          <img src="img/moletom-preto-rockfit-7.avif" alt="Moletom Preto com Estampa Vermelha" />
+          <h3>Moletom Black Flame</h3>
+          <p class="preco">R$ 149,99</p>
+          <p class="desc">Moletom Overside, com estampa resistente e acabamento impecável.</p>
+          <p class="tamanho">Tamanhos: P | M | G | GG</p>
+          <a href="https://wa.me/5548998290732?text=Olá!%20Tenho%20interesse%20no%20Moletom%20Black%20Flame%20PSSKATEBOARD" target="_blank" class="compra" rel="noopener noreferrer" aria-label="Comprar Moletom Black Flame via WhatsApp">Comprar via WhatsApp</a>
+        </div>
+
+        <div class="produto">
+          <img src="img/shopping.webp" alt="Moletom Cinza com Estampa Laranja" />
+          <h3>Moletom Urban Vibes</h3>
+          <p class="preco">R$ 159,99</p>
+          <p class="desc">Conforto e estilo para o dia a dia, com toque macio e design moderno.</p>
+          <p class="tamanho">Tamanhos: P | M | G | GG</p>
+          <a href="https://wa.me/5548998290732?text=Olá!%20Tenho%20interesse%20no%20Moletom%20Urban%20Vibes%20PSSKATEBOARD" target="_blank" class="compra" rel="noopener noreferrer" aria-label="Comprar Moletom Urban Vibes via WhatsApp">Comprar via WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="camisetas" aria-label="Seção de Camisetas">
+      <h2 class="produtos-titulo">Coleção Camisetas</h2>
+      <div class="produtos">
+        <div class="produto">
+          <img src="img/14c24b70-c314-41a0-8894-033bc780f44c.jpeg" alt="Camiseta Estampada 1" />
+          <h3>Camiseta Estampada Branca</h3>
+          <p class="preco">R$ 89,99</p>
+          <p class="desc">Estampa resistente e moderna para o seu estilo urbano.</p>
+          <p class="tamanho">Tamanhos: P | M | G | GG</p>
+          <a href="https://wa.me/5548998290732?text=Olá!%20Tenho%20interesse%20na%20Camiseta%20Estampada%201%20PSSKATEBOARD" target="_blank" class="compra" rel="noopener noreferrer" aria-label="Comprar Camiseta Estampada 1 via WhatsApp">Comprar via WhatsApp</a>
+        </div>
+
+        <div class="produto">
+          <img src="img/47d409ad-8912-4430-b8d9-e77fa8292212.jpeg" alt="Camiseta Estampada 2" />
+          <h3>Camiseta Estampada Preta</h3>
+          <p class="preco">R$ 89,99</p>
+          <p class="desc"> Conforto e estilo para o dia a dia, com um toque urbano.</p>
+          <p class="tamanho">Tamanhos: P | M | G | GG</p>
+          <a href="https://wa.me/554899290732?text=Olá!%20Tenho%20interesse%20na%20Camiseta%20Estampada%202%20PSSKATEBOARD" target="_blank" class="compra" rel="noopener noreferrer" aria-label="Comprar Camiseta Estampada 2 via WhatsApp">Comprar via WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" aria-label="Formulário de contato">
+      <h2>Fale com a gente</h2>
+      <p class="info">Tem dúvidas, sugestões ou quer fazer um pedido especial? Estamos prontos para te ouvir!</p>
+      <p class="info"><strong>Email:</strong> contato@psskateboard.com.br</p>
+      <p class="info"><strong>Telefone/WhatsApp:</strong> (48) 99829-0732</p>
+   
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 PSSKATEBOARD — Todos os direitos reservados. <br />
+    <small>Desenvolvido com paixão por skate e estilo.</small>
+  </footer>
+
+  <script>
+    function mostrarAba(id, botao) {
+      // Esconde todas as seções
+      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+
+      // Mostra a seção escolhida
+      document.getElementById(id).classList.add('active');
+
+      // Remove classe active de todos os botões
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+
+      // Adiciona classe active no botão clicado
+      botao.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
